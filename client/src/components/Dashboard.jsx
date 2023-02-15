@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Card } from "react-bootstrap";
 import Chart from "./Chart.jsx";
 import Table from "./Table.jsx";
@@ -7,8 +7,13 @@ import { RiSpaceShipFill } from "react-icons/ri";
 import { MdFreeBreakfast } from "react-icons/md";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { FaRobot } from "react-icons/fa";
+import { MdSend } from "react-icons/md";
 
 const Dashboard = () => {
+  const [show, setShow] = useState(true);
+  const [msg, setMsg] = useState("");
+  const [senderMsg, setSenderMsg] = useState();
+  const [responseMsg,setResponseMsg] = useState();
 
   const data = {
     labels: ["Critical", "Severe", "Acute", "Mild"],
@@ -37,9 +42,7 @@ const Dashboard = () => {
     <main className="mt-5 mx-5">
       <Container fluid>
         <Row style={{ margin: "3rem" }}>
-          {/* <Col className="fw-bold mt-3 fs-3" md={12}>
-            Welcome to CareDocs!!
-          </Col> */}
+         
         </Row>
         <Row>
           <Col md={6}>
@@ -71,7 +74,6 @@ const Dashboard = () => {
           <Col sm={6} md={3} className="mt-5">
             <Card
               key="1"
-              // text={variant.toLowerCase() === "light" ? "dark" : "white"}
               text="dark"
               className="mb-3 h-100 cards"
               style={{ backgroundColor: "#99e6ff" }}
@@ -93,10 +95,8 @@ const Dashboard = () => {
 
           <Col sm={6} md={3} className="mt-5">
             <Card
-              // bg="#adebad"
 
               key="2"
-              // text={variant.toLowerCase() === "light" ? "dark" : "white"}
               text="dark"
               className="mb-3 h-100 cards"
               style={{ backgroundColor: "#adebad" }}
@@ -119,10 +119,8 @@ const Dashboard = () => {
             <Card
               bg="light"
               key="3"
-              // text={variant.toLowerCase() === "light" ? "dark" : "white"}
               text="dark"
               className="mb-3 h-100 cards"
-              // style={{boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"}}
             >
               <Card.Header>
                 <MdFreeBreakfast size={22} /> Take a Break
@@ -141,7 +139,6 @@ const Dashboard = () => {
           <Col sm={6} md={3} className="mt-5">
             <Card
               key="4"
-              // text={variant.toLowerCase() === "light" ? "dark" : "white"}
               text="dark"
               className="mb-3 h-100 cards"
               style={{ backgroundColor: "#ff9999" }}
@@ -161,7 +158,6 @@ const Dashboard = () => {
             </Card>
           </Col>
         </Row>
-        {/* charts here */}
         <div
           className="chat-bot"
           style={{
@@ -173,8 +169,139 @@ const Dashboard = () => {
             padding: "1rem",
             boxShadow: "7px 5px 38px 0px rgba(153,153,153,1)",
           }}
+          onClick={() => setShow(!show)}
         >
-          <FaRobot size={70} color={"#008ae6"} />
+          <FaRobot size={50} color={"#008ae6"} />
+        </div>
+        <div
+          className={"chat-bot-container"}
+          style={{
+            position: "fixed",
+            display: show ? "block" : "none",
+            left: "62%",
+            bottom: 130,
+            backgroundColor: "white",
+            height: "70vh",
+            width: "65vh",
+            borderRadius: "3%",
+            // padding: '1rem',
+            boxShadow: "9px 7px 91px -14px rgba(59,59,59,1)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderBottom: "2px solid #ffffff",
+              padding: "0.5rem",
+            }}
+          >
+            {/* hh */}
+            <p style={{ color: "#9d9d9d", margin: 0, padding: 0 }}>
+              AI-Enabled Chat Bot
+            </p>
+          </div>
+          <div
+            style={{
+              height: "430px",
+              backgroundColor: "#eef3f9",
+              overflowY: "scroll",
+              overflowX: "hidden",
+            }}
+          >
+            <div
+              style={{
+                position: "relative",
+                top: "0",
+                left: "48%",
+              }}
+            >
+              {senderMsg ? (
+                <div
+                  // key={i}
+                  style={{
+                    backgroundColor: "white",
+                    boxShadow: "9px 7px 91px -14px #eef3f9",
+                    width: "230px",
+                    height: "auto",
+                    borderRadius: "10px",
+                    padding: "10px",
+                    margin: "10px",
+                  }}
+                >
+                  {senderMsg}
+                </div>
+              ) : null}
+            </div>
+            <div
+              style={{
+                position: "relative",
+                top: "0",
+                left: "1%",
+              }}
+            >
+              {responseMsg ? (
+                <div
+                  // key={i}
+                  style={{
+                    backgroundColor: "#4970df",
+                    boxShadow: "9px 7px 91px -14px #eef3f9",
+                    width: "300px",
+                    height: "auto",
+                    borderRadius: "10px",
+                    padding: "10px",
+                    margin: "10px",
+                    color: 'white'
+                  }}
+                >
+                  {/* {senderMsg} */}
+                  {responseMsg}
+                </div>
+              ) : null}
+            </div>
+          </div>
+          <div
+            style={{
+              padding: "1rem",
+            }}
+          >
+            <input
+              className="chatbot-input"
+              placeholder="Ask me anything..."
+              // onChange={(e)=>changeBotTextInput(e)}
+              onChange={(e) => {
+                setMsg(e.target.value);
+              }}
+              style={{
+                postion: "relative",
+                float: "left",
+                top: "100px",
+                height: "40px",
+                border: "none",
+                padding: "0.5rem 1rem",
+                borderRadius: "40px",
+                margin: "0 0.5rem 0 0",
+                width: "calc(100% - 52px)",
+                backgroundColor: "#dedfed",
+                boxShadow: "inset 0 0 0 2px #dedfed",
+                fontSize: "14px",
+                fontFamily: "Quicksand, sans-serif",
+                transition: "0.15s all ease-in-out",
+                boxSizing: "border-box",
+              }}
+            />
+
+            <div
+              className="chatbot-btn"
+              onClick={() => {
+                // const val = [...senderMsg];
+                setSenderMsg(msg);
+              }}
+            >
+              <MdSend size={20} />
+            </div>
+          </div>
         </div>
       </Container>
     </main>
