@@ -18,16 +18,18 @@ const patientSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "Please provide a password!"],
       minLength: 8,
     },
+    phoneNo: {
+      type: String,
+      required: [true, "Please add patient phone no!"],
+      minLength: 10,
+    },
 
-    assignedDoctors: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Doctor",
-      },
-    ],
+    assignedDoctors: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Doctor",
+    },
 
     currentDisease: {
       type: String,
@@ -41,4 +43,3 @@ const patientSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("Patient", patientSchema);
-

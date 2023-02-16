@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const cluster = require("cluster");
 const os = require("os");
 
-const isChronic = require("./routes/isChronicRoute");
+const chatBot = require("./routes/chatBotRoute");
 const doctorRoute = require("./routes/doctorRoute");
 const patientRoute = require("./routes/PatientRoute");
 const app = express();
@@ -41,12 +41,14 @@ const dbConnect = async () => {
     .catch((error) => console.error(error));
 };
 
+mongoose.set("strictQuery", false);
+
 dbConnect();
 
 // USING ROUTE
 app.use("/api/doctor", doctorRoute);
-app.use("/api/answer", isChronic);
-app.use("/api/patient", patientRoute )
+app.use("/api/answer", chatBot);
+app.use("/api/patient", patientRoute);
 
 // app.use("/api/auth", authRoute);
 // app.use("/api/patient", patientRoute);
