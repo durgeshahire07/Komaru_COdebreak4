@@ -1,0 +1,57 @@
+.chatheading {
+  display: flex;
+}
+.chatheadingtxt {
+  font-size: 2rem;
+  font-family: "Work Sans", sans-serif;
+}
+.chatinputbars {
+  width: 100%;
+  /* background-color: black; */
+  display: flex;
+  gap: 1rem;
+  /* padding: 1rem; */
+  justify-content: last baseline;
+}
+.chattokenbars {
+  margin-left: 16rem;
+  width: 40%;
+  display: flex;
+  gap: 1rem;
+}
+.messagebox {
+  height: 19rem;
+}
+.chatinputbtn {
+  font-size: 1.5rem;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+.chatinputbtn:hover {
+  background-color: #0dff002d;
+}
+
+.chattokenbtn {
+  font-size: 1.5rem;
+  padding-bottom: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+.chattokenbtn:hover {
+  background-color: #0008ff2d;
+}
+
+.sent-message {
+  border: 2px solid red;
+}
+
+.received-message {
+  border: 2px solid black;
+}

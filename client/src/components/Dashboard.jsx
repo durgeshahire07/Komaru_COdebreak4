@@ -8,13 +8,37 @@ import { MdFreeBreakfast } from "react-icons/md";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { FaRobot } from "react-icons/fa";
 import { MdSend } from "react-icons/md";
+import axios from "axios";
 
 const Dashboard = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [msg, setMsg] = useState("");
   const [senderMsg, setSenderMsg] = useState();
-  const [responseMsg,setResponseMsg] = useState();
+  const [responseMsg, setResponseMsg] = useState();
+  async function onSubmit() {
+    setSenderMsg(msg);
+    console.log("msg: ", senderMsg);
 
+    var config = {
+      method: "post",
+      url: "http://localhost:5000/api/answer/chat-bot",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        question: msg,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response);
+        setResponseMsg(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   const data = {
     labels: ["Critical", "Severe", "Acute", "Mild"],
     datasets: [
@@ -41,9 +65,7 @@ const Dashboard = () => {
   return (
     <main className="mt-5 mx-5">
       <Container fluid>
-        <Row style={{ margin: "3rem" }}>
-         
-        </Row>
+        <Row style={{ margin: "3rem" }}></Row>
         <Row>
           <Col md={6}>
             <Card
@@ -95,7 +117,6 @@ const Dashboard = () => {
 
           <Col sm={6} md={3} className="mt-5">
             <Card
-
               key="2"
               text="dark"
               className="mb-3 h-100 cards"
@@ -116,12 +137,7 @@ const Dashboard = () => {
           </Col>
 
           <Col sm={6} md={3} className="mt-5">
-            <Card
-              bg="light"
-              key="3"
-              text="dark"
-              className="mb-3 h-100 cards"
-            >
+            <Card bg="light" key="3" text="dark" className="mb-3 h-100 cards">
               <Card.Header>
                 <MdFreeBreakfast size={22} /> Take a Break
               </Card.Header>
@@ -252,7 +268,7 @@ const Dashboard = () => {
                     borderRadius: "10px",
                     padding: "10px",
                     margin: "10px",
-                    color: 'white'
+                    color: "white",
                   }}
                 >
                   {/* {senderMsg} */}
@@ -296,7 +312,7 @@ const Dashboard = () => {
               className="chatbot-btn"
               onClick={() => {
                 // const val = [...senderMsg];
-                setSenderMsg(msg);
+                onSubmit();
               }}
             >
               <MdSend size={20} />

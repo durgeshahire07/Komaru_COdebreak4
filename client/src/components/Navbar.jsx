@@ -1,18 +1,28 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 function NavbarHeader() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='fixed-top'>
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      className="fixed-top"
+    >
       <Container>
         <Navbar.Brand href="#home">CareDocs</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Chat</NavDropdown.Item>
+              <Link to="patients">
+                <NavDropdown.Item href="#action/3.1">Patients</NavDropdown.Item>
+              </Link>
+
               <NavDropdown.Item href="#action/3.2">
                 Collabaration
               </NavDropdown.Item>

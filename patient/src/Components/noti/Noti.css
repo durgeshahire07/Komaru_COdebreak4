@@ -1,0 +1,10 @@
+.notipage{
+    padding: 2.5rem;
+}
+.rownoti{
+    display: flex;
+}
+.col-6{
+    height: 100%;
+    width: 50%;
+}
